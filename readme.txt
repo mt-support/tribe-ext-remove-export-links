@@ -36,6 +36,11 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
+= 1.1.0 2020-02-05 = V2/Block Edition
+
+* Supports hiding iCal links from V2 views.
+* Supports hiding iCal links from block-editor powered events.
+
 = 1.0.0 2018-04-12 = Initial Version
 
 * Initial release

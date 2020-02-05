@@ -3,7 +3,7 @@
  * Plugin Name:       The Events Calendar Extension: Remove Export Links
  * Plugin URI:        https://theeventscalendar.com/extensions/remove-export-links/
  * Description:       Remove the Export Links from Event Views
- * Version:           1.0.0
+ * Version:           1.1.0
  * Extension Class:   Tribe__Extension__Remove_Export_Links
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-remove-export-links
  * Author:            Modern Tribe, Inc.
@@ -47,10 +47,12 @@ if (
 		 * Extension initialization and hooks.
 		 */
 		public function init() {
-			add_action( 'init', array( $this, 'remove_hooks' ) );
+			add_action( 'init', [ $this, 'remove_for_views_v1' ] );
+			add_filter( 'tribe_template_html', [ $this, 'remove_for_views_v2' ], 10, 3 );
+			add_filter( 'tribe_template_context_get', [ $this, 'remove_for_blocks' ], 10, 2 );
 		}
 
-		public function remove_hooks() {
+		public function remove_for_views_v1() {
 			$provider = $this->ical_provider();
 			/**
 			 * Removes the markup for "+Ical Export" and "+Google Calendar" links on Single Events.
@@ -61,6 +63,32 @@ if (
 			 * Removes the markup for the "+ Export Events" link on Calendar views.
 			 */
 			remove_filter( 'tribe_events_after_footer', array( $provider, 'maybe_add_link' ) );
+		}
+
+		public function remove_for_views_v2( $html, $file, $name ) {
+			if (
+				is_array( $name )
+				&& count( $name ) === 2
+				&& $name[0] === 'components'
+				&& $name[1] === 'ical-link'
+			) {
+				return '';
+			}
+
+			return $html;
+		}
+
+		public function remove_for_blocks( $value, $index ) {
+			if (
+				is_array( $index )
+				&& count( $index ) === 2
+				&& $index[0] === 'attributes'
+				&& $index[1] === 'hasiCal'
+			) {
+				return false;
+			}
+
+			return $value;
 		}
 
 		/**
