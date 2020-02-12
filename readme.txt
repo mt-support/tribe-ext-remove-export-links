@@ -36,7 +36,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
-= [1.1.1] 2020-02-05 =
+= [1.1.1] 2020-02-12 =
 
 * Tweak - Improve compatibility with updated views.
 
