@@ -3,7 +3,7 @@
  * Plugin Name:       The Events Calendar Extension: Remove Export Links
  * Plugin URI:        https://theeventscalendar.com/extensions/remove-export-links/
  * Description:       Remove the Export Links from Event Views
- * Version:           1.1.0
+ * Version:           1.1.1
  * Extension Class:   Tribe__Extension__Remove_Export_Links
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-remove-export-links
  * Author:            Modern Tribe, Inc.
@@ -48,7 +48,7 @@ if (
 		 */
 		public function init() {
 			add_action( 'init', [ $this, 'remove_for_views_v1' ] );
-			add_filter( 'tribe_template_html', [ $this, 'remove_for_views_v2' ], 10, 3 );
+			add_filter( 'tribe_template_html:events/v2/components/ical-link', '__return_empty_string' );
 			add_filter( 'tribe_template_context_get', [ $this, 'remove_for_blocks' ], 10, 2 );
 		}
 
@@ -63,19 +63,6 @@ if (
 			 * Removes the markup for the "+ Export Events" link on Calendar views.
 			 */
 			remove_filter( 'tribe_events_after_footer', array( $provider, 'maybe_add_link' ) );
-		}
-
-		public function remove_for_views_v2( $html, $file, $name ) {
-			if (
-				is_array( $name )
-				&& count( $name ) === 2
-				&& $name[0] === 'components'
-				&& $name[1] === 'ical-link'
-			) {
-				return '';
-			}
-
-			return $html;
 		}
 
 		public function remove_for_blocks( $value, $index ) {

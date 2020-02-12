@@ -2,9 +2,9 @@
 Contributors: ModernTribe
 Donate link: http://m.tri.be/29
 Tags: events, calendar, remove, export, button 
-Requires at least: 4.5
-Tested up to: 4.9.4
-Requires PHP: 5.2.4
+Requires at least: 4.9
+Tested up to: 5.3.2
+Requires PHP: 5.6
 Stable tag: 1.1.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -36,11 +36,15 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
-= 1.1.0 2020-02-05 = V2/Block Edition
+= [1.1.1] 2020-02-05 =
+
+* Tweak - Improve compatibility with updated views.
+
+= [1.1.0] 2020-02-05 =
 
 * Supports hiding iCal links from V2 views.
 * Supports hiding iCal links from block-editor powered events.
 
-= 1.0.0 2018-04-12 = Initial Version
+= [1.0.0] 2018-04-12 =
 
 * Initial release
